@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -66,6 +67,20 @@ public class OfferController {
 				})
 				.orElse(ResponseEntity.noContent().build());
 
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping(path="/centers/add") // Map ONLY GET Requests
+	public @ResponseBody Center addCenter (@RequestParam String name
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		System.out.println("centers/add::");
+		Center n = new Center();
+		n.setName(name);
+		
+		centerRepository.save(n);
+		return n;
 	}
 	
 }
