@@ -13,3 +13,5 @@ create user 'admin'@'localhost' identified by 'admin';
 grant all on simpleApp.* to 'admin'@'localhost';
 
 In application.proterties chage spring.jpa.hibernate.ddl-auto=none to spring.jpa.hibernate.ddl-auto=create-drop the first run (to generate the db tables)
+
+start: simpleAppApplication.java > run as > Java Application
