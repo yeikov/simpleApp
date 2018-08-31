@@ -1,4 +1,4 @@
-package com.jmfrei.simpleApp;
+package com.jmfrei.simpleapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

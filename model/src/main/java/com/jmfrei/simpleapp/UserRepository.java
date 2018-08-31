@@ -1,8 +1,8 @@
-package com.jmfrei.simpleApp;
+package com.jmfrei.simpleapp;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.jmfrei.simpleApp.User;
+import com.jmfrei.simpleapp.User;
 
 //This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 //CRUD refers Create, Read, Update, Delete
