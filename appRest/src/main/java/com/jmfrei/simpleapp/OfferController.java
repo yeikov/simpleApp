@@ -16,48 +16,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jmfrei.simpleapp.BackOffice;
+
 @Controller
 public class OfferController {
-	
-	@Autowired
-	private CenterRepository centerRepository;
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@GetMapping(path="/centers")
-	public @ResponseBody Iterable<Center> getAllCenters() {
-		// This returns a JSON or XML with the users
-		return centerRepository.findAll();
-	}
-	
-	
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@GetMapping(path="/centros")
-	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody Collection<Center> readCenters() {
-		
-		return (Collection<Center>) this.centerRepository.findAll();
-	}
-	
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@GetMapping(path="/centers/{Id}")
-	public @ResponseBody Center getCenter(@PathVariable("Id") int id) {
-		// This returns a JSON or XML with the centers
-		// return centerRepository.findOne(id); crud repo
-		return centerRepository.findOne(id);
-	}
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@GetMapping(path="/centers/{Id}")
-	@RequestMapping(method = RequestMethod.POST)
-	ResponseEntity<?> add(@PathVariable String centerId, @RequestBody Center input) {
-		// this.validateCenter(centerId);
 
-		return this.centerRepository
-				.findByName(centerId)
-				.map(center -> {
-					Center result = centerRepository.save(new Center());
+	@Autowired
+	private OfferRepository offerRepository;
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping(path= BackOffice.backOfficeUrl + "/offers")
+	public @ResponseBody Iterable<Offer> getAllOffers() {
+		// This returns a JSON or XML with the users
+		return offerRepository.findAll();
+	}
+	
+	
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping(path= BackOffice.backOfficeUrl + "/ofertas")
+	@RequestMapping(method = RequestMethod.GET)
+	public @ResponseBody Collection<Offer> readOffers() {
+		
+		return (Collection<Offer>) this.offerRepository.findAll();
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping(path= BackOffice.backOfficeUrl + "/offers/{Id}")
+	public @ResponseBody Offer getOffer(@PathVariable("Id") int id) {
+		// This returns a JSON or XML with the offers
+		// return offerRepository.findOne(id); crud repo
+		return offerRepository.findOne(id);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@GetMapping(path= BackOffice.backOfficeUrl + "/offers/{Id}")
+	@RequestMapping(method = RequestMethod.POST)
+	ResponseEntity<?> add(@PathVariable String offerId, @RequestBody Offer input) {
+		// this.validateOffer(offerId);
+
+		return this.offerRepository
+				.findByTitle(offerId)
+				.map(offer -> {
+					Offer result = offerRepository.save(new Offer());
 
 					URI location = ServletUriComponentsBuilder
 						.fromCurrentRequest().path("/{id}")
@@ -70,16 +72,16 @@ public class OfferController {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200")
-	@GetMapping(path="/centers/add") // Map ONLY GET Requests
-	public @ResponseBody Center addCenter (@RequestParam String name
+	@GetMapping(path= BackOffice.backOfficeUrl + "/offers/add") // Map ONLY GET Requests
+	public @ResponseBody Offer addOffer (@RequestParam String title
 			) {
-		// @ResponseBody means the returned String is the response, not a view name
+		// @ResponseBody means the returned String is the response, not a view title
 		// @RequestParam means it is a parameter from the GET or POST request
-		System.out.println("centers/add::");
-		Center n = new Center();
-		n.setName(name);
+		System.out.println("offers/add::");
+		Offer n = new Offer();
+		n.setTitle(title);
 		
-		centerRepository.save(n);
+		offerRepository.save(n);
 		return n;
 	}
 	
