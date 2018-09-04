@@ -26,11 +26,29 @@ public class Offer {
 		return title;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	private String code;
+	
+	private String description;
 	
 	@ManyToOne()
 	private BussinesUnit bussinesUnit;
@@ -44,6 +62,6 @@ public class Offer {
 	@ManyToOne()
 	private KnowledgeArea knowledgeArea;
 	
-	private String description;
+	
 	
 }
