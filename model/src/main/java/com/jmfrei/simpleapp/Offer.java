@@ -53,6 +53,14 @@ public class Offer {
 	@ManyToOne()
 	private BussinesUnit bussinesUnit;
 	
+	public BussinesUnit getBussinesUnit() {
+		return bussinesUnit;
+	}
+
+	public void setBussinesUnit(BussinesUnit bussinesUnit) {
+		this.bussinesUnit = bussinesUnit;
+	}
+
 	@ManyToOne()
 	private Center center;
 	

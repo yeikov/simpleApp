@@ -13,11 +13,11 @@ public class BussinesUnit {
 	
 	private String name;
 
-	public BussinesUnit(int id, String name) {
+	/*public BussinesUnit(int id, String name) {
 		// super();
 		this.id = id;
 		this.name = name;
-	}
+	}*/
 
 	public int getId() {
 		return id;

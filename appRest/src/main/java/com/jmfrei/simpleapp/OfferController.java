@@ -33,6 +33,7 @@ public class OfferController {
 	
 	
 	
+	
 	@CrossOrigin(origins="http://localhost:4200")
 	@GetMapping(path= BackOffice.backOfficeUrl + "/ofertas")
 	@RequestMapping(method = RequestMethod.GET)
@@ -49,6 +50,20 @@ public class OfferController {
 		// return offerRepository.findOne(id); crud repo
 		return offerRepository.findOne(id);
 	}
+	
+	
+	//{jmf exp solo retorna coincidencias completas...
+	//http://localhost:8080/backoffice/offers/?title=titleOferta%202
+	@CrossOrigin(origins="http://localhost:4200")
+	@RequestMapping(value = BackOffice.backOfficeUrl+"/offers/", method = RequestMethod.GET)
+	public @ResponseBody Iterable<Offer> findAllByTitle(
+			@RequestParam("title") String title){
+		
+		return offerRepository.findAllByTitleLike('%'+title+'%');
+		
+	}
+	
+	//jmf exp}
 	
 	@CrossOrigin(origins="http://localhost:4200")
 	@GetMapping(path= BackOffice.backOfficeUrl + "/offers/{Id}")
@@ -84,5 +99,7 @@ public class OfferController {
 		offerRepository.save(n);
 		return n;
 	}
+	
+	
 	
 }
