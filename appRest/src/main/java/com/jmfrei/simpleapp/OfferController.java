@@ -2,6 +2,7 @@ package com.jmfrei.simpleapp;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jmfrei.simpleapp.BackOffice;
 
+class caseBussinesUnits {
+	//List <BussinesUnit> myBU=
+	
+	
+}
+
 @Controller
 public class OfferController {
+	
+	
+	@Autowired
+	private BussinesUnitRepository bussinesUnitRepository;
+	
+	
 
 	@Autowired
 	private OfferRepository offerRepository;
@@ -52,18 +65,46 @@ public class OfferController {
 	}
 	
 	
-	//{jmf exp solo retorna coincidencias completas...
+	//{jmf exp
 	//http://localhost:8080/backoffice/offers/?title=titleOferta%202
-	@CrossOrigin(origins="http://localhost:4200")
+/*	@CrossOrigin(origins="http://localhost:4200")
 	@RequestMapping(value = BackOffice.backOfficeUrl+"/offers/", method = RequestMethod.GET)
 	public @ResponseBody Iterable<Offer> findAllByTitle(
 			@RequestParam("title") String title){
 		
 		return offerRepository.findAllByTitleLike('%'+title+'%');
 		
-	}
+	}*/
 	
 	//jmf exp}
+	
+	//{jmf exp
+		//
+		@CrossOrigin(origins="http://localhost:4200")
+		@RequestMapping(value = BackOffice.backOfficeUrl+"/offers/", method = RequestMethod.GET)
+		public @ResponseBody Iterable<Offer> findAll(
+				@RequestParam("title") String title,
+				@RequestParam("code") String code,
+				@RequestParam("unit") int unit
+				
+				){
+			
+			BussinesUnit muBU = bussinesUnitRepository.findOne(unit);
+			return offerRepository
+					.findAllByTitleLikeAndCodeLikeAndBussinesUnitLike(
+					//.findAllByBussinesUnitLike(
+							'%'+title+'%',
+							'%'+code+'%',
+							//Long.valueOf(bussinesUnitRepository.findOne(unit).getId())
+							bussinesUnitRepository.findOne(unit)
+							);
+			
+		}
+		
+		//jmf exp}
+	
+	
+	
 	
 	@CrossOrigin(origins="http://localhost:4200")
 	@GetMapping(path= BackOffice.backOfficeUrl + "/offers/{Id}")
